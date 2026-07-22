@@ -32,6 +32,7 @@ module.exports = {
 **🔨 Moderation** *(requires permissions)*
 \`-kick [@user] [reason]\` — Kick a user
 \`-ban [@user] [reason]\` — Ban a user
+\`-unban [user ID] [reason]\` — Unban a user by their ID
 \`-mute [@user] [minutes] [reason]\` — Timeout a user
 \`-unmute [@user]\` — Remove a timeout
 \`-clear [amount]\` — Delete messages (up to 100)
