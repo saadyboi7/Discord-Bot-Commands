@@ -41,23 +41,23 @@ module.exports = {
 
       // End the game
       if (word.toLowerCase() === "end") {
+        m.delete().catch(() => {});
         collector.stop("ended");
         const full = sentence.length ? sentence.join(" ") : "*(nothing yet)*";
         return message.channel.send(
-          `📖 **Game over!**\n\n` +
-          `Here's the sentence you built:\n> ${full}`
+          `📖 **Game over! Here's the sentence you built:**\n\n> ${full}`
         );
       }
 
       // Check for banned words
       if (BANNED_WORDS.includes(word.toLowerCase())) {
+        m.delete().catch(() => {}); // hide the banned word
         eliminated.add(m.author.id);
-        sentence.push(`~~${word}~~`); // show the slip-up crossed out
+        sentence.push(`~~${word}~~`); // mark the slip-up for the reveal
 
-        const full = sentence.join(" ");
-        await m.reply(
-          `☠️ **${m.author.username}** said "**${word}**" — ELIMINATED!\n\n` +
-          `Sentence so far:\n> ${full}`
+        await message.channel.send(
+          `☠️ **${m.author.username}** slipped up and said a banned word — **ELIMINATED!**\n` +
+          `*(the full sentence will be revealed at the end)*`
         );
 
         // If only one person is left (and at least 2 played), declare winner
@@ -65,10 +65,11 @@ module.exports = {
         return;
       }
 
-      // Valid word — add it to the sentence
+      // Valid word — delete the message and confirm secretly
+      m.delete().catch(() => {});
       sentence.push(word);
-      const full = sentence.join(" ");
-      m.reply(`✅ *(${sentence.length} word${sentence.length === 1 ? "" : "s"})*\n> ${full}`);
+      const confirm = await message.channel.send(`✅ Word added! *(${sentence.length} word${sentence.length === 1 ? "" : "s"} so far — sentence hidden until the end!)*`);
+      setTimeout(() => confirm.delete().catch(() => {}), 3000);
     });
 
     collector.on("end", (_, reason) => {
