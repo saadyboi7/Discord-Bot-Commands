@@ -36,6 +36,7 @@ module.exports = {
 \`-unmute [@user]\` — Remove a timeout
 \`-clear [amount]\` — Delete messages (up to 100)
 \`-warn [@user] [reason]\` — Warn a user
+\`-unwarn [@user] [# or 'all']\` — Remove a warning
 `;
 
     message.reply(helpText);
