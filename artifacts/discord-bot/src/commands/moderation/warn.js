@@ -5,9 +5,8 @@
 //  Example: -warn @User Please stop spamming
 // ============================================================
 
-// Simple in-memory warning store: { userId: [{ reason, moderator, date }] }
-// Note: warnings reset when the bot restarts. For permanent warnings, you'd need a database.
-const warnings = new Map();
+// Import the shared warnings store so -unwarn can access the same data
+const { warnings } = require("../../warnings-store");
 
 module.exports = {
   name: "warn",
@@ -65,6 +64,4 @@ module.exports = {
     ).catch(() => {}); // user may have DMs off — that's okay
   },
 
-  // Expose warnings so other commands could check them if needed
-  warnings,
 };
