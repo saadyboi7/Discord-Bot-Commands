@@ -20,6 +20,11 @@ module.exports = {
 \`-rps [rock/paper/scissors]\` — Play Rock Paper Scissors
 \`-trivia\` — Answer a trivia question (15 seconds!)
 \`-guess\` — Guess a number between 1–100
+\`-slots\` — Spin the slot machine!
+\`-hangman\` — Guess the hidden word letter by letter
+\`-tictactoe [@user]\` — Play Tic Tac Toe against someone
+\`-wordchain\` — Each word must start with the last letter
+\`-nomatterwhat\` — Build a sentence — never say "I" or "Me"!
 
 **🔧 Utility**
 \`-ping\` — Check bot response time
