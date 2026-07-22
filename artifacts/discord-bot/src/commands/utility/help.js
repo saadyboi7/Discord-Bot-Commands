@@ -9,9 +9,6 @@ module.exports = {
   usage: "-help",
 
   async execute(message) {
-    // Delete the command message so nobody else sees it was typed
-    message.delete().catch(() => {});
-
     const helpText = `
 **🤖 Bot Commands** *(prefix: \`-\`)*
 
@@ -43,16 +40,6 @@ module.exports = {
 \`-unwarn [@user] [# or 'all']\` — Remove a warning
 `;
 
-    try {
-      // Send the help list as a DM to the user
-      await message.author.send(helpText);
-      // Let them know in the channel (this message will be brief and visible to others)
-      const notice = await message.channel.send(`📬 ${message.author}, check your DMs!`);
-      // Auto-delete the notice after 5 seconds to keep chat clean
-      setTimeout(() => notice.delete().catch(() => {}), 5000);
-    } catch {
-      // If the user has DMs turned off, just reply normally
-      message.channel.send(`${message.author}, ❌ I couldn't DM you! Enable DMs from server members in your Privacy Settings, then try again.`);
-    }
+    message.reply(helpText);
   },
 };
