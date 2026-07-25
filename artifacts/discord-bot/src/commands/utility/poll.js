@@ -1,18 +1,16 @@
 // ============================================================
 //  -poll [question] | [option1] | [option2] ...
-//  Create a poll with up to 5 options. People react to vote!
+//  Creates a native Discord poll with radio buttons, vote count,
+//  time remaining, and Show Results / Vote buttons.
 //  Example: -poll Favorite color? | Red | Blue | Green
 // ============================================================
 
-const NUMBER_EMOJIS = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣"];
-
 module.exports = {
   name: "poll",
-  description: "Create a poll. Separate question and options with `|`.",
+  description: "Create a native Discord poll. Separate question and options with `|`.",
   usage: "-poll Question? | Option 1 | Option 2 | Option 3",
 
   async execute(message, args) {
-    // Join all args back and split by the | character
     const parts = args.join(" ").split("|").map((p) => p.trim()).filter(Boolean);
 
     if (parts.length < 3) {
@@ -22,30 +20,25 @@ module.exports = {
       );
     }
 
-    if (parts.length > 6) {
-      return message.reply("❌ You can have at most **5 options** in a poll.");
+    if (parts.length > 11) {
+      return message.reply("❌ You can have at most **10 options** in a poll.");
     }
 
     const question = parts[0];
-    const options = parts.slice(1); // Everything after the first | is an option
-
-    // Build the poll text
-    const optionLines = options
-      .map((opt, i) => `${NUMBER_EMOJIS[i]} ${opt}`)
-      .join("\n");
-
-    const pollMessage = await message.channel.send(
-      `📊 **Poll by ${message.author.username}**\n\n` +
-      `**${question}**\n\n` +
-      `${optionLines}`
-    );
+    const options  = parts.slice(1);
 
     // Delete the command message to keep chat clean
-    message.delete().catch(() => {}); // ignore error if we can't delete
+    message.delete().catch(() => {});
 
-    // Add reaction buttons so people can vote
-    for (let i = 0; i < options.length; i++) {
-      await pollMessage.react(NUMBER_EMOJIS[i]);
-    }
+    // Send a native Discord poll — this produces the exact UI from the screenshot:
+    // radio buttons, vote count, "23h left", Show Results, and Vote buttons
+    await message.channel.send({
+      poll: {
+        question: { text: question },
+        answers: options.map((opt) => ({ poll_media: { text: opt } })),
+        duration: 24,            // poll lasts 24 hours
+        allow_multiselect: false, // one answer only (radio buttons)
+      },
+    });
   },
 };
