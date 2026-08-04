@@ -51,7 +51,7 @@ console.log(`✅ Loaded ${client.commands.size} commands`);
 client.once("clientReady", () => {
   console.log(`🤖 Logged in as ${client.user.tag}`);
   console.log(`📋 Prefix: ${PREFIX}`);
-  console.log("Startup complete! Bot is online and is ready to serve commands!")
+  console.log("SYSTEMS:ONLINE! Running on JarvisOs version 1.2 ")
   client.user.setActivity(`${PREFIX}help for commands`);
 });
 
