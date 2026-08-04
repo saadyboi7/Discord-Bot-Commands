@@ -48,9 +48,10 @@ for (const category of categories) {
 console.log(`✅ Loaded ${client.commands.size} commands`);
 
 // ----- When the bot is ready -----
-client.once("ready", () => {
+client.once("clientReady", () => {
   console.log(`🤖 Logged in as ${client.user.tag}`);
   console.log(`📋 Prefix: ${PREFIX}`);
+  console.log("Startup complete! Bot is online and is ready to serve commands!")
   client.user.setActivity(`${PREFIX}help for commands`);
 });
 
