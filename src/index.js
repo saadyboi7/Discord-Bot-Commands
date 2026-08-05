@@ -51,7 +51,7 @@ console.log(`✅ Loaded ${client.commands.size} commands`);
 client.once("clientReady", () => {
   console.log(`🤖 Logged in as ${client.user.tag}`);
   console.log(`📋 Prefix: ${PREFIX}`);
-  console.log("SYSTEMS:ONLINE! Running on JarvisOs version 1.2 ")
+  console.log("SYSTEMS:ONLINE! Ready to help!")
   client.user.setActivity(`${PREFIX}help for commands`);
 });
 
