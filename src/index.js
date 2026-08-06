@@ -51,7 +51,7 @@ console.log(`✅ Loaded ${client.commands.size} commands`);
 client.once("clientReady", () => {
   console.log(`🤖 Logged in as ${client.user.tag}`);
   console.log(`📋 Prefix: ${PREFIX}`);
-  console.log("SYSTEMS:ONLINE! Ready to help!")
+  console.log("Systems are online! Bot is loaded!")
   client.user.setActivity(`${PREFIX}help for commands`);
 });
 
