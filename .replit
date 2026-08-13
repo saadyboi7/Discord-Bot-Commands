@@ -1,1 +1,2 @@
-modules = ["nodejs-20"]
+[nix]
+packages = ["nodejs-16_x"]
