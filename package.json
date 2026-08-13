@@ -2,10 +2,10 @@
   "name": "@workspace/discord-bot",
   "version": "1.0.0",
   "description": "A Discord bot with fun, utility, and moderation commands",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "node src/index.js"
+    "start": "node index.js",
+    "dev": "node index.js"
   },
   "dependencies": {
     "discord.js": "^14.27.0",
